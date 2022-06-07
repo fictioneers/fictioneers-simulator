@@ -3,15 +3,33 @@
     <div class="button-holder">
       <button type="button">Progress story</button>
     </div>
-    <div>Step 0 | Beat 0: beat name</div>
+
+    <div class="narrative-state" v-if="currentUser?.narrative_state">
+      <div>
+        <b>Step</b> {{ currentUser.narrative_state?.current_step || "None" }}
+      </div>
+      <div>
+        <b>Beat</b>
+        {{ currentUser.narrative_state?.current_beat.id }}
+        {{ currentUser.narrative_state?.current_beat.name }}
+      </div>
+      <div>
+        <b>Timeline ID</b> {{ currentUser.narrative_state?.active_timeline_id }}
+      </div>
+      <div><b>User ID</b> {{ currentUser.id }}</div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mapState } from "vuex";
 
 export default defineComponent({
   name: "ToolBar",
+  computed: mapState({
+    currentUser: "currentUser",
+  }),
 });
 </script>
 
@@ -30,5 +48,14 @@ export default defineComponent({
 }
 .button-holder {
   flex-basis: 100%;
+}
+
+.narrative-state {
+  color: #777;
+  font-size: 14px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr;
+  text-align: left;
 }
 </style>

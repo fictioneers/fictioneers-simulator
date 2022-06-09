@@ -1,6 +1,6 @@
 import { Store } from "vuex";
-import { State } from ".";
+import { ActionTypes, State } from ".";
 
 export default async function bootstrap_data_vuex_plugin(store: Store<State>) {
-  await store.dispatch("getCurrentUser");
+  await store.dispatch(ActionTypes.INIT_USER);
 }

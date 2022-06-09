@@ -1,10 +1,10 @@
 <template>
   <div class="ToolBar">
     <div class="button-holder">
-      <button type="button">Progress story</button>
+      <button type="button" v-on:click="progress_story">Progress story</button>
     </div>
 
-    <div class="narrative-state" v-if="currentUser?.narrative_state">
+    <!-- <div class="narrative-state" v-if="currentUser?.narrative_state">
       <div>
         <b>Step</b> {{ currentUser.narrative_state?.current_step || "None" }}
       </div>
@@ -17,19 +17,33 @@
         <b>Timeline ID</b> {{ currentUser.narrative_state?.active_timeline_id }}
       </div>
       <div><b>User ID</b> {{ currentUser.id }}</div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default defineComponent({
   name: "ToolBar",
-  computed: mapState({
-    currentUser: "currentUser",
+  data: () => ({
+    loading: false,
   }),
+  computed: mapState(["userStoryState"]),
+  methods: {
+    ...mapActions(["progressUserStoryState"]),
+    async progress_story() {
+      this.loading = true;
+      try {
+        await this.progressUserStoryState();
+        this.loading = false;
+      } catch (err) {
+        this.loading = false;
+        // throw new Error(err);
+      }
+    },
+  },
 });
 </script>
 

@@ -1,9 +1,12 @@
 <template>
   <div class="EventStateChange">
     <div class="content">
-      {{ eventStateChange?.title }}
+      {{ eventStateChange?.narrative_event_title }}
     </div>
-    <div class="button-holder" v-if="eventStateChange?.type === 'ACTIVITY'">
+    <div
+      class="button-holder"
+      v-if="eventStateChange?.narrative_event_type === 'ACTIVITY'"
+    >
       <div class="button-grid">
         <button type="button">Skip</button>
         <button type="button">Complete</button>
@@ -13,12 +16,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { components } from "../types/fictioneers-api";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "EventStateChange",
   props: {
-    eventStateChange: Object,
+    eventStateChange: {
+      type: Object as PropType<
+        components["schemas"]["UserTimelineEventStateChangeSerializer"]
+      >,
+    },
   },
 });
 </script>

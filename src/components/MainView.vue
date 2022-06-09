@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <ul>
-      <li v-for="(eventStageChange, index) in eventStateChanges" :key="index">
+      <li v-for="(eventStageChange, index) in timelineEventStates" :key="index">
         <EventStateChange :eventStateChange="eventStageChange" />
       </li>
     </ul>
@@ -10,34 +10,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mapState } from "vuex";
 import EventStateChange from "./EventStateChange.vue";
 
 export default defineComponent({
   name: "MainView",
-  data() {
-    return {
-      eventStateChanges: [
-        {
-          title: "yo",
-          type: "ACTIVITY",
-        },
-        {
-          title: "yo",
-        },
-        {
-          title: "yo",
-        },
-        {
-          title: "yo",
-        },
-        {
-          title: "yo",
-        },
-        {
-          title: "yo",
-        },
-      ],
-    };
+  computed: {
+    ...mapState(["timelineEventStates"]),
   },
   components: { EventStateChange },
 });

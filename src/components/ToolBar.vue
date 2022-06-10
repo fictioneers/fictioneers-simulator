@@ -22,6 +22,7 @@
 </template>
 
 <script lang="ts">
+import { ActionTypes } from "@/store/action-types";
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "vuex";
 
@@ -32,11 +33,13 @@ export default defineComponent({
   }),
   computed: mapState(["userStoryState"]),
   methods: {
-    ...mapActions(["progressUserStoryState"]),
     async progress_story() {
       this.loading = true;
       try {
-        await this.progressUserStoryState();
+        await this.$store.dispatch(
+          ActionTypes.PROGRESS_USER_STORY_STATE,
+          undefined
+        );
         this.loading = false;
       } catch (err) {
         this.loading = false;

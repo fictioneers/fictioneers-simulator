@@ -52,13 +52,13 @@ export default defineComponent({
   position: fixed;
   bottom: 0;
   height: 100px;
-  border-top: 1px solid #ccc;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   background: #fff;
+  box-shadow: 0 -3px 3px rgba(0, 0, 0, 0.1);
 }
 .button-holder {
   flex-basis: 100%;

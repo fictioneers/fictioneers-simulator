@@ -1,10 +1,11 @@
 <template>
   <div class="main">
-    <ul>
+    <ul v-if="timelineEventStates.length">
       <li v-for="(eventStageChange, index) in timelineEventStates" :key="index">
         <EventStateChange :eventStateChange="eventStageChange" />
       </li>
     </ul>
+    <p class="loading" v-else>Loading...</p>
   </div>
 </template>
 
@@ -24,15 +25,30 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.main {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+}
 ul {
   list-style-type: none;
   padding: 0;
   display: grid;
-  grid-gap: 10px;
-  margin: 10px;
+  grid-gap: 20px;
+  margin: 10px auto;
+}
+
+li {
+  margin: 0 auto;
 }
 
 a {
   color: #42b983;
+}
+
+.loading {
+  align-self: center;
+  justify-self: center;
+  margin: autol;
 }
 </style>

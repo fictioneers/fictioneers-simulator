@@ -25,7 +25,7 @@ body {
   background-color: #f6f6f6;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -36,7 +36,7 @@ button {
   border: 1px solid #bad8db;
   background: #cceef1;
   padding: 10px 20px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   min-width: 150px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;

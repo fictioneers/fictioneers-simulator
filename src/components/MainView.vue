@@ -1,10 +1,16 @@
 <template>
   <div class="main">
-    <ul v-if="timelineEventStates.length">
-      <li v-for="(eventStageChange, index) in timelineEventStates" :key="index">
-        <EventStateChange :eventStateChange="eventStageChange" />
-      </li>
-    </ul>
+    <div class="grid" v-if="timelineEventStates.length">
+      <ul>
+        <li
+          v-for="(eventStageChange, index) in timelineEventStates"
+          :key="index"
+        >
+          <EventStateChange :eventStateChange="eventStageChange" />
+        </li>
+      </ul>
+      <SideBar />
+    </div>
     <p class="loading" v-else>Loading...</p>
   </div>
 </template>
@@ -13,13 +19,14 @@
 import { defineComponent } from "vue";
 import { mapState } from "vuex";
 import EventStateChange from "./EventStateChange.vue";
+import SideBar from "@/components/SideBar.vue";
 
 export default defineComponent({
   name: "MainView",
   computed: {
     ...mapState(["timelineEventStates"]),
   },
-  components: { EventStateChange },
+  components: { EventStateChange, SideBar },
 });
 </script>
 
@@ -29,17 +36,27 @@ export default defineComponent({
   min-height: calc(100vh - 100px);
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
+
+@media (min-width: 800px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 20px;
+  }
+}
+
 ul {
   list-style-type: none;
   padding: 0;
   display: grid;
   grid-gap: 20px;
-  margin: 10px auto;
+  margin: 0 auto;
 }
 
 li {
-  margin: 0 auto;
+  margin: 0;
 }
 
 a {

@@ -63,18 +63,12 @@ export default defineComponent({
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  flex-basis: 100%;
   margin: 0;
   border-radius: 10px;
   background-color: #fff;
   opacity: 0;
   animation: fadeIn 300ms ease-out forwards;
-}
-
-@media (min-width: 800px) {
-  .EventStateChange {
-    width: 800px;
-  }
 }
 
 .content {

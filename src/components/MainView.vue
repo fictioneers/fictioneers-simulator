@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="grid" v-if="timelineEventStates.length">
+    <div class="grid" v-if="timelineEventStates.length || userStoryState">
       <ul>
         <li
           v-for="(eventStageChange, index) in timelineEventStates"
@@ -24,7 +24,12 @@ import SideBar from "@/components/SideBar.vue";
 export default defineComponent({
   name: "MainView",
   computed: {
-    ...mapState(["timelineEventStates"]),
+    timelineEventStates: function () {
+      return this.$store.state.timelineEventStates;
+    },
+    userStoryState: function () {
+      return this.$store.state.userStoryState;
+    },
   },
   components: { EventStateChange, SideBar },
 });

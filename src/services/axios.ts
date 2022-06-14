@@ -1,7 +1,8 @@
 import axios from "axios";
+import { config } from "./config";
 
 const axiosAdmin = axios.create({
-  baseURL: process.env.VUE_APP_API_BASE_URL,
-  headers: { Authorization: process.env.VUE_APP_VISIBLE_KEY },
+  baseURL: config.apiBaseUrl,
+  headers: { Authorization: config.visibleKey },
 });
 export { axiosAdmin };

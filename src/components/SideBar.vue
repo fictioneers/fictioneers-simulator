@@ -4,29 +4,44 @@
       <div class="title">Step</div>
       <div class="count">{{ userStoryState.current_step || "-" }}</div>
     </div>
-    <div class="beat">
-      <b>Beat</b>
+    <div class="beat section">
+      <h3>Beat</h3>
       <div>{{ userStoryState?.current_beat?.id }}</div>
       <div>{{ userStoryState?.current_beat?.name }}</div>
     </div>
-    <div>
-      <b>Timeline ID</b>
+    <div class="section">
+      <h3>Timeline ID</h3>
       <div>{{ userStoryState?.active_timeline_id }}</div>
     </div>
-    <div>
-      <b>User ID</b>
+    <div class="section">
+      <h3>User ID</h3>
       <div>{{ currentUser?.id }}</div>
+    </div>
+    <div class="hr" />
+    <div class="section">
+      <h3>Timeline ID</h3>
+      <div>{{ config.timelineId }}</div>
+    </div>
+    <div class="section">
+      <h3>Visible Key</h3>
+      <div>{{ config.visibleKey }}</div>
+    </div>
+    <div class="section">
+      <h3>API URL</h3>
+      <div>{{ config.apiBaseUrl }}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { config } from "@/services/config";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "SideBar",
   data: () => ({
     loading: false,
+    config: config,
   }),
   computed: {
     userStoryState: function () {
@@ -63,6 +78,13 @@ export default defineComponent({
   opacity: 1;
 }
 
+h3 {
+  font-size: 12px;
+  margin: 0;
+  font-weight: normal;
+  color: #999;
+}
+
 .step {
   width: 50px;
   border: 1px solid #ccc;
@@ -83,5 +105,14 @@ export default defineComponent({
 .step .count {
   font-size: 40px;
   font-weight: bold;
+}
+
+.section {
+  margin: 0 0 10px;
+}
+
+.hr {
+  margin: 10px 0;
+  border-bottom: 1px solid #ccc;
 }
 </style>

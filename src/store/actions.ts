@@ -5,9 +5,10 @@ import { ActionTree } from "vuex";
 import { State } from "@/store/state-type";
 import { Actions, ActionTypes } from "@/store/action-types";
 import { MutationTypes } from "@/store/mutation-types";
+import { config } from "@/services/config";
 
 const axiosExperience = axios.create({
-  baseURL: process.env.VUE_APP_API_BASE_URL,
+  baseURL: config.apiBaseUrl,
 });
 
 export const actions: ActionTree<State, State> & Actions = {
@@ -57,7 +58,7 @@ export const actions: ActionTree<State, State> & Actions = {
         >,
         components["schemas"]["CreateUserDeserializer"]
       >("/users", {
-        published_timeline_id: process.env.VUE_APP_TIMELINE_ID,
+        published_timeline_id: config.timelineId,
         timezone: "Europe/London",
         disable_time_guards: false,
       });

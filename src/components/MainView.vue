@@ -25,7 +25,7 @@ export default defineComponent({
   name: "MainView",
   computed: {
     timelineEventStates: function () {
-      return this.$store.state.timelineEventStates;
+      return this.$store.getters.sortedTimelineEventStates;
     },
     userStoryState: function () {
       return this.$store.state.userStoryState;

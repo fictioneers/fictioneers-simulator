@@ -55,4 +55,10 @@ button {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
 }
+
+button svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
 </style>

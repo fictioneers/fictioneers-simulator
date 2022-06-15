@@ -4,6 +4,7 @@ import { State } from "@/store/state-type";
 
 export enum ActionTypes {
   INIT_USER = "INIT_USER",
+  CLEAR_USER = "CLEAR_USER",
   GET_USER_STORY_STATE = "GET_USER_STORY_STATE",
   GET_CURRENT_USER = "GET_CURRENT_USER",
   GET_USER_TIMELINE_EVENTS = "GET_USER_TIMELINE_EVENTS",
@@ -13,6 +14,7 @@ export enum ActionTypes {
 
 export interface Actions {
   [ActionTypes.INIT_USER](context: AugmentedActionContext): Promise<any>;
+  [ActionTypes.CLEAR_USER](context: AugmentedActionContext): Promise<any>;
   [ActionTypes.GET_USER_STORY_STATE](
     context: AugmentedActionContext
   ): Promise<any>;

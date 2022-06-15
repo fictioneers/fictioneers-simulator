@@ -9,8 +9,6 @@ const { timeline_id, visible_key, env } = qs.parse(
   window.location.search.replace("?", "")
 );
 
-console.log(timeline_id, visible_key, env);
-
 const apiBaseUrls = {
   [Envs.DEV]: "https://api.dev.fictioneers.co.uk/v1",
   [Envs.PROD]: "https://api.fictioneers.co.uk/v1",

@@ -6,6 +6,7 @@ import { State } from "@/store/state-type";
 import { Actions, ActionTypes } from "@/store/action-types";
 import { MutationTypes } from "@/store/mutation-types";
 import { config } from "@/services/config";
+import { clearUserIdFromBrowserStorage, getUserId } from "@/services/user";
 
 const axiosExperience = axios.create({
   baseURL: config.apiBaseUrl,
@@ -21,6 +22,11 @@ export const actions: ActionTree<State, State> & Actions = {
     ]);
   },
 
+  [ActionTypes.CLEAR_USER]: async ({ dispatch }) => {
+    // reloads the page not sure if this makes sense as an action?
+    clearUserIdFromBrowserStorage();
+  },
+
   [ActionTypes.GET_USER_STORY_STATE]: async ({ commit }) => {
     const result = await axiosExperience.get<
       components["schemas"]["ResponseSerializer_UserStoryStateSerializer_"]
@@ -31,11 +37,13 @@ export const actions: ActionTree<State, State> & Actions = {
   },
 
   [ActionTypes.GET_CURRENT_USER]: async ({ commit }) => {
-    const user_id = "user_id";
+    const userId = getUserId();
     const tokenRequest = await axiosAdmin.post<
-      components["schemas"]["EphemeralTokenSerializer"]
+      components["schemas"]["EphemeralTokenSerializer"],
+      AxiosResponse<components["schemas"]["EphemeralTokenSerializer"]>,
+      components["schemas"]["TokenDeserializer"]
     >("/auth/token", {
-      user_id,
+      user_id: userId.id,
     });
     const token = tokenRequest.data.access_token;
 
@@ -64,7 +72,7 @@ export const actions: ActionTree<State, State> & Actions = {
       });
     }
 
-    commit(MutationTypes.SET_CURRENT_USER, { id: user_id });
+    commit(MutationTypes.SET_CURRENT_USER, { id: userId.id });
   },
 
   [ActionTypes.PROGRESS_USER_STORY_STATE]: async ({

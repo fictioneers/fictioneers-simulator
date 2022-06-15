@@ -16,7 +16,7 @@
               property in eventStateChange &&
               typeof eventStateChange[property] === "string"
                 ? eventStateChange[property]
-                : ""
+                : JSON.stringify(eventStateChange[property])
             }}
           </p>
         </div>

@@ -27,6 +27,4 @@ const config = {
   apiBaseUrl: apiBaseUrlFromUrl || process.env.VUE_APP_API_BASE_URL,
 };
 
-console.log(config);
-
 export { config };

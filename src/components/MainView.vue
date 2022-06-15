@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="grid" v-if="timelineEventStates.length || userStoryState">
-      <ul>
+      <ul v-if="timelineEventStates.length">
         <li
           v-for="(eventStageChange, index) in timelineEventStates"
           :key="index"
@@ -9,6 +9,10 @@
           <EventStateChange :eventStateChange="eventStageChange" />
         </li>
       </ul>
+      <p class="loading" v-else>
+        No timeline event state changes<br />
+        <span>Try progressing the story</span>
+      </p>
       <SideBar />
     </div>
     <p class="loading" v-else>Loading...</p>
@@ -53,6 +57,7 @@ export default defineComponent({
 }
 
 ul {
+  width: 100%;
   list-style-type: none;
   padding: 0;
   display: grid;
@@ -71,6 +76,10 @@ a {
 .loading {
   align-self: center;
   justify-self: center;
-  margin: autol;
+  margin: auto;
+}
+
+.loading span {
+  opacity: 0.5;
 }
 </style>

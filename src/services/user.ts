@@ -21,7 +21,7 @@ const retrieveUserIdFromBrowserStorage = (): UserLocalStorage | undefined => {
 
   try {
     const user = localStorage.getItem(LOCAL_STORAGE_KEY);
-    userId = user ? JSON.parse(user).userId : undefined;
+    userId = user ? JSON.parse(user) : undefined;
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn("Cannot get user from local storage", e);
@@ -32,6 +32,7 @@ const retrieveUserIdFromBrowserStorage = (): UserLocalStorage | undefined => {
 
 export const getUserId = (): UserLocalStorage => {
   let userId = retrieveUserIdFromBrowserStorage();
+
   if (!userId) {
     const newId = `${Math.floor(Math.random() * 1000000)}`;
     storeUserIdInBrowserStorage(newId);

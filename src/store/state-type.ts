@@ -13,4 +13,5 @@ export interface State {
     maxSteps: number;
     pauseAtBeats: boolean;
   };
+  error: string | undefined;
 }

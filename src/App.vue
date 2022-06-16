@@ -18,6 +18,9 @@ export default defineComponent({
 </script>
 
 <style>
+:root {
+  --toolbar-height: 100px;
+}
 html,
 body {
   margin: 0;
@@ -60,5 +63,19 @@ button svg {
   width: 18px;
   height: 18px;
   display: block;
+}
+
+input[type="text"],
+select,
+textarea {
+  font-family: "Poppins", sans-serif;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+label {
+  margin-right: 5px;
 }
 </style>

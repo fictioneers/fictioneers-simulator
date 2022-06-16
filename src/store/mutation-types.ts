@@ -8,6 +8,7 @@ export enum MutationTypes {
   SET_USER_STORY_STATE = "SET_USER_STORY_STATE",
   SET_USER_TIMELINE_EVENTS = "SET_USER_TIMELINE_EVENTS",
   SET_TIMELINE_EVENT_STATES = "SET_TIMELINE_EVENT_STATES",
+  SET_ERROR = "SET_ERROR",
 }
 
 export type Mutations<S = State> = {
@@ -31,4 +32,5 @@ export type Mutations<S = State> = {
     state: S,
     payload: components["schemas"]["UserTimelineEventStateChangeSerializer"][]
   ): void;
+  [MutationTypes.SET_ERROR](state: S, payload: string): void;
 };

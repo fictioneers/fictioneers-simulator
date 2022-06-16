@@ -15,24 +15,28 @@
       </p>
       <SideBar />
     </div>
+    <p class="error" v-else-if="error">{{ error }}</p>
     <p class="loading" v-else>Loading...</p>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapState } from "vuex";
 import EventStateChange from "./EventStateChange.vue";
 import SideBar from "@/components/SideBar.vue";
 
 export default defineComponent({
   name: "MainView",
+
   computed: {
     timelineEventStates: function () {
       return this.$store.getters.sortedTimelineEventStates;
     },
     userStoryState: function () {
       return this.$store.state.userStoryState;
+    },
+    error: function () {
+      return this.$store.state.error;
     },
   },
   components: { EventStateChange, SideBar },
@@ -42,10 +46,14 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .main {
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - var(--toolbar-height));
   display: flex;
   justify-content: center;
   padding: 20px;
+}
+
+.grid {
+  width: 100%;
 }
 
 @media (min-width: 800px) {
@@ -73,7 +81,8 @@ a {
   color: #42b983;
 }
 
-.loading {
+.loading,
+.error {
   align-self: center;
   justify-self: center;
   margin: auto;

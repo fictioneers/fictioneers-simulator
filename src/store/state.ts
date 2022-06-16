@@ -9,4 +9,5 @@ export const state: State = {
   timelineEventStates: [],
   userStoryState: undefined,
   userTimelineEvents: {},
+  error: undefined,
 };

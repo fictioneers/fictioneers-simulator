@@ -6,7 +6,7 @@
         class="icon"
         title="Settings"
         :disabled="loading"
-        v-on:click="showSettings"
+        v-on:click="toggleSettings"
       >
         <svg
           version="1.1"
@@ -68,12 +68,14 @@
         </svg>
       </button>
     </div>
+    <SettingsPanel :visible="settingsVisible || error" />
   </div>
 </template>
 
 <script lang="ts">
 import { ActionTypes } from "@/store/action-types";
 import { defineComponent } from "vue";
+import SettingsPanel from "./SettingsPanel.vue";
 
 export default defineComponent({
   name: "ToolBar",
@@ -81,6 +83,11 @@ export default defineComponent({
     loading: false,
     settingsVisible: false,
   }),
+  computed: {
+    error: function () {
+      return this.$store.state.error;
+    },
+  },
   methods: {
     async progressStory() {
       this.loading = true;
@@ -105,13 +112,14 @@ export default defineComponent({
         throw err;
       }
     },
-    showSettings() {
-      this.settingsVisible = true;
+    toggleSettings() {
+      this.settingsVisible = !this.settingsVisible;
     },
     hideSettings() {
       this.settingsVisible = false;
     },
   },
+  components: { SettingsPanel },
 });
 </script>
 
@@ -119,7 +127,7 @@ export default defineComponent({
 .ToolBar {
   position: fixed;
   bottom: 0;
-  height: 100px;
+  height: var(--toolbar-height);
   width: 100%;
   display: flex;
   justify-content: center;

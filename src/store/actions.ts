@@ -38,14 +38,22 @@ export const actions: ActionTree<State, State> & Actions = {
 
   [ActionTypes.GET_CURRENT_USER]: async ({ commit }) => {
     const userId = getUserId();
-    const tokenRequest = await axiosAdmin.post<
-      components["schemas"]["EphemeralTokenSerializer"],
-      AxiosResponse<components["schemas"]["EphemeralTokenSerializer"]>,
-      components["schemas"]["TokenDeserializer"]
-    >("/auth/token", {
-      user_id: userId.id,
-    });
-    const token = tokenRequest.data.access_token;
+    let token: string;
+    try {
+      const tokenRequest = await axiosAdmin.post<
+        components["schemas"]["EphemeralTokenSerializer"],
+        AxiosResponse<components["schemas"]["EphemeralTokenSerializer"]>,
+        components["schemas"]["TokenDeserializer"]
+      >("/auth/token", {
+        user_id: userId.id,
+      });
+      token = tokenRequest.data.access_token;
+    } catch (e) {
+      commit(
+        MutationTypes.SET_ERROR,
+        "Could not get auth token. Check these details are correct"
+      );
+    }
 
     axiosExperience.interceptors.request.use(async function (config) {
       config.headers = {

@@ -18,4 +18,7 @@ export const mutations: MutationTree<State> & Mutations = {
   [MutationTypes.SET_TIMELINE_EVENT_STATES](state, payload) {
     state.timelineEventStates = payload;
   },
+  [MutationTypes.SET_ERROR](state, payload) {
+    state.error = payload;
+  },
 };

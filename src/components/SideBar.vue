@@ -17,31 +17,16 @@
       <h3>User ID</h3>
       <div>{{ currentUser?.id }}</div>
     </div>
-    <div class="hr" />
-    <div class="section">
-      <h3>Timeline ID</h3>
-      <div>{{ config.timelineId }}</div>
-    </div>
-    <div class="section">
-      <h3>Visible Key</h3>
-      <div>{{ config.visibleKey }}</div>
-    </div>
-    <div class="section">
-      <h3>API URL</h3>
-      <div>{{ config.apiBaseUrl }}</div>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { config } from "@/services/config";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "SideBar",
   data: () => ({
     loading: false,
-    config: config,
   }),
   computed: {
     userStoryState: function () {
@@ -109,10 +94,5 @@ h3 {
 
 .section {
   margin: 0 0 10px;
-}
-
-.hr {
-  margin: 10px 0;
-  border-bottom: 1px solid #ccc;
 }
 </style>

@@ -19,12 +19,22 @@ export const actions: ActionTree<State, State> & Actions = {
       dispatch(ActionTypes.GET_USER_STORY_STATE),
       dispatch(ActionTypes.GET_USER_TIMELINE_EVENTS),
       dispatch(ActionTypes.GET_USER_EVENT_STATE_CHANGES),
+      dispatch(ActionTypes.GET_TIMELINE_DETAILS),
     ]);
   },
 
-  [ActionTypes.CLEAR_USER]: async ({ dispatch }) => {
+  [ActionTypes.CLEAR_USER]: async () => {
     // reloads the page not sure if this makes sense as an action?
     clearUserIdFromBrowserStorage();
+  },
+
+  [ActionTypes.GET_TIMELINE_DETAILS]: async ({ commit }) => {
+    const result = await axiosAdmin.get<
+      components["schemas"]["TimelineSerializer"]
+    >(`/timelines/${config.timelineId}`);
+    if (result.data) {
+      commit(MutationTypes.SET_TIMELINE_DETAILS, result.data);
+    }
   },
 
   [ActionTypes.GET_USER_STORY_STATE]: async ({ commit }) => {

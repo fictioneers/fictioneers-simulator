@@ -1,6 +1,6 @@
 import qs from "qs";
 
-const { timelineId, visible_key, apiBaseUrl } = qs.parse(
+const { timelineId, visibleKey, apiBaseUrl } = qs.parse(
   window.location.search.replace("?", "")
 );
 
@@ -12,7 +12,7 @@ const validApiBaseUrlFromUrl =
 
 const config = {
   timelineId: timelineId || process.env.VUE_APP_TIMELINE_ID,
-  visibleKey: visible_key || process.env.VUE_APP_VISIBLE_KEY,
+  visibleKey: visibleKey || process.env.VUE_APP_VISIBLE_KEY,
   apiBaseUrl: validApiBaseUrlFromUrl ? apiBaseUrl : API_URL_DEV,
 };
 

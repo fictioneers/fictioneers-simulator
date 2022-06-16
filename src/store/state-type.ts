@@ -3,6 +3,7 @@ import { components } from "@/types/fictioneers-api";
 
 export interface State {
   currentUser: User;
+  timelineDetails?: components["schemas"]["TimelineSerializer"];
   timelineEventStates: components["schemas"]["UserTimelineEventStateChangeSerializer"][];
   userStoryState?: components["schemas"]["UserStoryStateSerializer"];
   userTimelineEvents: Record<

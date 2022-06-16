@@ -1,21 +1,29 @@
 <template>
-  <div class="SideBar" v-if="userStoryState">
-    <div class="step">
-      <div class="title">Step</div>
-      <div class="count">{{ userStoryState.current_step || "-" }}</div>
+  <div class="SideBar">
+    <div v-if="timelineDetails">
+      <div class="section">
+        <h1>{{ timelineDetails.title }}</h1>
+        <p>{{ timelineDetails.description }}</p>
+      </div>
     </div>
-    <div class="beat section">
-      <h3>Beat</h3>
-      <div>{{ userStoryState?.current_beat?.id }}</div>
-      <div>{{ userStoryState?.current_beat?.name }}</div>
-    </div>
-    <div class="section">
-      <h3>Timeline ID</h3>
-      <div>{{ userStoryState?.active_timeline_id }}</div>
-    </div>
-    <div class="section">
-      <h3>User ID</h3>
-      <div>{{ currentUser?.id }}</div>
+    <div v-if="userStoryState">
+      <div class="step">
+        <div class="title">Step</div>
+        <div class="count">{{ userStoryState.current_step || "-" }}</div>
+      </div>
+      <div class="beat section">
+        <h3>Beat</h3>
+        <div>{{ userStoryState?.current_beat?.id }}</div>
+        <div>{{ userStoryState?.current_beat?.name }}</div>
+      </div>
+      <div class="section">
+        <h3>Timeline ID</h3>
+        <div>{{ userStoryState?.active_timeline_id }}</div>
+      </div>
+      <div class="section">
+        <h3>User ID</h3>
+        <div>{{ currentUser?.id }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +37,9 @@ export default defineComponent({
     loading: false,
   }),
   computed: {
+    timelineDetails: function () {
+      return this.$store.state.timelineDetails;
+    },
     userStoryState: function () {
       return this.$store.state.userStoryState;
     },
@@ -61,6 +72,10 @@ export default defineComponent({
 
 .SideBar {
   opacity: 1;
+}
+
+h1 {
+  margin: 0 0 10px;
 }
 
 h3 {

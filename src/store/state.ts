@@ -5,6 +5,7 @@ export const state: State = {
     maxSteps: 1,
     pauseAtBeats: false,
   },
+  timelineDetails: undefined,
   currentUser: {},
   timelineEventStates: [],
   userStoryState: undefined,

@@ -1,6 +1,6 @@
 import { axiosAdmin } from "@/services/axios";
 import { components } from "@/types/fictioneers-api";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { ActionTree } from "vuex";
 import { State } from "@/store/state-type";
 import { Actions, ActionTypes } from "@/store/action-types";
@@ -77,17 +77,34 @@ export const actions: ActionTree<State, State> & Actions = {
         components["schemas"]["ResponseSerializer_UserSerializer_"]
       >("/users/me");
     } catch {
-      await axiosExperience.post<
-        components["schemas"]["ResponseSerializer_UserSerializer_"],
-        AxiosResponse<
-          components["schemas"]["ResponseSerializer_UserSerializer_"]
-        >,
-        components["schemas"]["CreateUserDeserializer"]
-      >("/users", {
-        published_timeline_id: config.timelineId,
-        timezone: "Europe/London",
-        disable_time_guards: false,
-      });
+      try {
+        await axiosExperience.post<
+          components["schemas"]["ResponseSerializer_UserSerializer_"],
+          AxiosResponse<
+            components["schemas"]["ResponseSerializer_UserSerializer_"]
+          >,
+          components["schemas"]["CreateUserDeserializer"]
+        >("/users", {
+          published_timeline_id: config.timelineId,
+          timezone: "Europe/London",
+          disable_time_guards: false,
+        });
+      } catch (e: unknown) {
+        if (axios.isAxiosError(e)) {
+          const error = e as AxiosError<
+            components["schemas"]["ResponseSerializer_UserSerializer_"]
+          >;
+          commit(
+            MutationTypes.SET_ERROR,
+            `${
+              error.response?.data.error?.content ||
+              error.response?.data.error?.detail
+            }`
+          );
+        } else {
+          commit(MutationTypes.SET_ERROR, `${e}`);
+        }
+      }
     }
 
     commit(MutationTypes.SET_CURRENT_USER, { id: userId.id });

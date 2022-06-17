@@ -51,12 +51,17 @@ body {
 }
 button {
   border: 1px solid #bad8db;
-  background: #cceef1;
+  background-color: #cceef1;
+  transition: background-color ease-out 100ms;
   padding: 10px 20px;
   font-family: "Poppins", sans-serif;
   min-width: 150px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #bbdade;
 }
 
 button svg {

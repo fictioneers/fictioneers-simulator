@@ -21,6 +21,32 @@
           </p>
         </div>
       </div>
+      <div class="details">
+        <h2>Contentful content</h2>
+        <span></span>
+        <template v-for="(contentItem, index) of content" :key="index">
+          <div
+            v-for="(key, index) of Object.keys(contentItem?.fields)"
+            :key="index"
+          >
+            <p class="small">{{ key }}</p>
+            <p v-if="typeof contentItem?.fields[key] === 'string'">
+              {{ contentItem?.fields[key] }}
+            </p>
+            <p v-else-if="typeof contentItem?.fields[key] === 'object'">
+              <img
+                class="cotentful-image"
+                v-if="
+                  contentItem?.fields[key].fields.file.contentType.includes(
+                    'image'
+                  )
+                "
+                :src="contentItem?.fields[key].fields.file.url"
+              />
+            </p>
+          </div>
+        </template>
+      </div>
     </div>
     <div
       class="button-holder"
@@ -46,6 +72,21 @@ export default defineComponent({
         components["schemas"]["UserTimelineEventStateChangeSerializer"]
       >,
       required: true,
+    },
+  },
+  computed: {
+    content: function () {
+      const { contentfulContent } = this.$store.state;
+      if (!contentfulContent) {
+        return;
+      }
+      return this.$props.eventStateChange.state_change_content
+        .map((content) => {
+          if (contentfulContent.entries[content.content_id]) {
+            return contentfulContent.entries[content.content_id];
+          }
+        })
+        .filter((item) => !!item);
     },
   },
 });
@@ -118,5 +159,9 @@ table {
   text-align: left;
   padding: 0;
   border-collapse: collapse;
+}
+
+.cotentful-image {
+  width: 100px;
 }
 </style>

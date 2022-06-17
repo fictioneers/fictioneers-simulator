@@ -24,4 +24,7 @@ export const mutations: MutationTree<State> & Mutations = {
   [MutationTypes.SET_ERROR](state, payload) {
     state.error = payload;
   },
+  [MutationTypes.SET_CONTENTFUL_CONTENT](state, payload) {
+    state.contentfulContent = payload;
+  },
 };

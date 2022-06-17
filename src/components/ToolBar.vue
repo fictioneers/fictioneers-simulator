@@ -74,7 +74,7 @@
 
 <script lang="ts">
 import { ActionTypes } from "@/store/action-types";
-import { defineComponent } from "vue";
+import { defineComponent } from "@vue/runtime-core";
 import SettingsPanel from "./SettingsPanel.vue";
 
 export default defineComponent({

@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from "@vue/runtime-core";
 import EventStateChange from "./EventStateChange.vue";
 import SideBar from "@/components/SideBar.vue";
 

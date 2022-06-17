@@ -1,6 +1,7 @@
 import { User } from "@/types";
 import { components } from "@/types/fictioneers-api";
 import { State } from "@/store/state-type";
+import { ContentfulContent } from "./bootstrap-data-vuex-plugin";
 
 export enum MutationTypes {
   INSERT_TIMELINE_EVENT_STATES = "INSERT_TIMELINE_EVENT_STATES",
@@ -10,6 +11,7 @@ export enum MutationTypes {
   SET_USER_TIMELINE_EVENTS = "SET_USER_TIMELINE_EVENTS",
   SET_TIMELINE_EVENT_STATES = "SET_TIMELINE_EVENT_STATES",
   SET_ERROR = "SET_ERROR",
+  SET_CONTENTFUL_CONTENT = "SET_CONTENTFUL_CONTENT",
 }
 
 export type Mutations<S = State> = {
@@ -36,6 +38,10 @@ export type Mutations<S = State> = {
   [MutationTypes.SET_TIMELINE_EVENT_STATES](
     state: S,
     payload: components["schemas"]["UserTimelineEventStateChangeSerializer"][]
+  ): void;
+  [MutationTypes.SET_CONTENTFUL_CONTENT](
+    state: S,
+    payload: ContentfulContent
   ): void;
   [MutationTypes.SET_ERROR](state: S, payload: string): void;
 };

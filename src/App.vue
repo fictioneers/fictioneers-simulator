@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from "@vue/runtime-core";
 import MainView from "./components/MainView.vue";
 import ToolBar from "./components/ToolBar.vue";
 

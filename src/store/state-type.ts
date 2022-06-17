@@ -1,5 +1,6 @@
 import { User } from "@/types";
 import { components } from "@/types/fictioneers-api";
+import { ContentfulContent } from "./bootstrap-data-vuex-plugin";
 
 export interface State {
   currentUser: User;
@@ -15,4 +16,5 @@ export interface State {
     pauseAtBeats: boolean;
   };
   error: string | undefined;
+  contentfulContent?: ContentfulContent;
 }

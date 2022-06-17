@@ -24,18 +24,39 @@
         <h3>User ID</h3>
         <div>{{ currentUser?.id }}</div>
       </div>
+      <div class="section">
+        <h3>Contentful entries</h3>
+        <div>
+          {{
+            contentfulContent && contentfulContent.entries
+              ? Object.keys(contentfulContent.entries).length
+              : "Contentful not loaded"
+          }}
+        </div>
+      </div>
+      <div class="section">
+        <h3>Contentful assets</h3>
+        <div>
+          {{
+            contentfulContent && contentfulContent.assets
+              ? contentfulContent.assets.items.length
+              : "Contentful not loaded"
+          }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from "@vue/runtime-core";
 
 export default defineComponent({
   name: "SideBar",
   data: () => ({
     loading: false,
   }),
+
   computed: {
     timelineDetails: function () {
       return this.$store.state.timelineDetails;
@@ -45,6 +66,9 @@ export default defineComponent({
     },
     currentUser: function () {
       return this.$store.state.currentUser;
+    },
+    contentfulContent: function () {
+      return this.$store.state.contentfulContent;
     },
   },
 });

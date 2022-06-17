@@ -11,4 +11,5 @@ export const state: State = {
   userStoryState: undefined,
   userTimelineEvents: {},
   error: undefined,
+  contentfulContent: undefined,
 };

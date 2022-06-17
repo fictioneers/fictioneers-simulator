@@ -19,6 +19,20 @@
           <option :value="API_URL_PROD">Prod</option>
           <option :value="API_URL_DEV">Dev</option>
         </select>
+        <label for="settings-contentful-space">Contentful Space</label>
+        <input
+          type="text"
+          id="settings-contentful-space"
+          v-model="config.contentfulSpace"
+        />
+        <label for="settings-contentful-access-token"
+          >Contentful Access Token</label
+        >
+        <input
+          type="text"
+          id="settings-contentful-access-token"
+          v-model="config.contentfulAccessToken"
+        />
       </div>
       <button type="button" @click="save">Save</button>
     </form>
@@ -32,7 +46,7 @@ import {
   API_URL_DEV,
 } from "@/services/config";
 import qs from "qs";
-import { defineComponent } from "vue";
+import { defineComponent } from "@vue/runtime-core";
 
 export default defineComponent({
   name: "SettingsPanel",
@@ -43,11 +57,7 @@ export default defineComponent({
     },
   },
   data: () => ({
-    config: {
-      timelineId: appConfig.timelineId,
-      visibleKey: appConfig.visibleKey,
-      apiBaseUrl: appConfig.apiBaseUrl,
-    },
+    config: appConfig,
     API_URL_PROD,
     API_URL_DEV,
   }),
